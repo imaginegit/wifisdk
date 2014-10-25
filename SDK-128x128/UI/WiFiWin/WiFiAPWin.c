@@ -301,6 +301,9 @@ static int WiFiReadAPPWFrmRecord(void)
 		strcpy(gSysConfig.WiFiConfig.ssid, "initap201412");
 		strcpy(gSysConfig.WiFiConfig.password, "123456789");
 		gSysConfig.WiFiConfig.password_len = 9;
+		/*strcpy(gSysConfig.WiFiConfig.ssid, "imagine");
+		strcpy(gSysConfig.WiFiConfig.password, "13428725525");
+		gSysConfig.WiFiConfig.password_len = 11;*/
 	}
 
 	if (FALSE != CheckMsg(MSG_WIFI_APPW_JUMP))
@@ -610,11 +613,12 @@ UINT32 WiFiAPWinService(void)
 
         //TaskSwitch(TASK_ID_WIFI_PLAY, NULL);
         SendMsg(MSG_WIFI_TCP_CONNECTING);
-	 SendMsg(MSG_QPW_ENABLE);
+	 if(!ConnectNumber) {
+	 	SendMsg(MSG_QPW_ENABLE);
+	 }
 	 //create_active_command_data(temp, C_UPLOAD);
 	 eth_service(0);
 	 upload_connect(C_UPLOAD);
-	 
         return RETURN_FAIL;
     }
 

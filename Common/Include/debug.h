@@ -34,7 +34,7 @@ extern void __error__(char *pcFilename, unsigned long ulLine);
 *-------------------------------------------------------------------------------
 */
 
-//#define DEBUG
+#define DEBUG
 
 #ifdef DEBUG
 #define ASSERT(expr) {                                      \
