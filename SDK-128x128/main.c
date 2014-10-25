@@ -126,6 +126,18 @@ void SysVariableInit(void)
     chip_freq.armclk = 0;
 
     QpwNumber = 0;
+
+#ifdef MOUDLE_3LED
+    TimingMark = 0;
+    OpenTimer = 0;
+    CloseTimer = 0;
+    ColorMark = 0;
+    StartColor = 0;
+    EndColor   = 0;
+    ColorSpace = 0;
+    MarkTime   = 0;
+    CurrentTimer = 0;
+#endif
     
 /*    LCD_TEXTFORT   = 0xffff;
     LCD_IMAGEINDEX = 0xffff;*/
@@ -452,6 +464,10 @@ void SystemInit(void)
     }
     
     LCD_SetColor(TempColor);*/
+    GpioMuxSet(SD_DET, IOMUX_GPIOD2_PWM1);
+    GpioMuxSet(BACKLIGHT_PIN, IOMUX_GPIOD3_PWM2);
+    
+    PWM_Start(1);
 }
 
 /*
@@ -504,7 +520,7 @@ void SysTickInit(void)
     SysTickDisable();
     
     SysTickClkSourceSet(NVIC_SYSTICKCTRL_CLKIN);
-    SysTickPeriodSet(10);
+    SysTickPeriodSet(10); //10
     
     SysTickEnable();
     
@@ -540,6 +556,7 @@ void SysInterruptInit(void)
     
     IntRegister(INT_ID39_OOL_PLAYON,  (void*)playon_wakeup_int);
     IntRegister(INT_ID40_PWR_5V_READY,(void*)vbus_wakeup_int);
+    IntRegister(INT_ID28_PWM0, (void*)pwm0_int);
     
     //interrupt enable.
     IntEnable(FAULT_ID4_MPU);
@@ -549,6 +566,7 @@ void SysInterruptInit(void)
     IntEnable(INT_ID16_DMA);
     //IntEnable(INT_ID26_GPIO);                     //test GPIO INT
     IntEnable(INT_ID30_ADC);
+    IntEnable(INT_ID28_PWM0);
 
     DEBUG("system INT initial: DMA & Systick INT enable");
 }
@@ -620,7 +638,7 @@ UINT32 Main(void)
     BoardInit();
     
     //poweron();
-    
+
     //interruption initialization.
     SysInterruptInit();
     
@@ -636,7 +654,12 @@ UINT32 Main(void)
     SysTickInit();
 
     SysServiceInit();
-   
+
+    PWM0_Start();
+
+#ifdef MOUDLE_3LED
+    led_init();
+#endif
     printf("Os Start!\n");
     OSStart(&pMainWin, &pMainThread);
 	
