@@ -325,6 +325,8 @@ typedef enum
 		MSG_QPW_ENABLE,
 		MSG_WIFI_RECONNECT,
 		MSG_WIFI_SAVE_INFO,
+		MSG_AP_MODE_SWITCH,
+		MSG_WIFI_MODE_SWITCH,
 
     MSG_ID_MAX	//max message number
 }MSG_ID;
