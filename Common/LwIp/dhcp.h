@@ -71,7 +71,7 @@ void dhcp_fine_tmr(void);
 #define DHCP_SERVER_PORT 67
 
 #define USER_CLIENT_PORT 778//59123//78
-#define USER_SERVER_PORT 59123//778//77
+#define USER_SERVER_PORT 59124//778//77
 
 /** DHCP client states */
 #define DHCP_REQUESTING 1

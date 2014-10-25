@@ -81,6 +81,7 @@
 #include "etharp.h"
 
 #include <string.h>
+#include "protocol.h"
 
 /** Default for DHCP_GLOBAL_XID is 0xABCD0000
  * This can be changed by defining DHCP_GLOBAL_XID and DHCP_GLOBAL_XID_HEADER, e.g.
@@ -1440,8 +1441,8 @@ void send_user_data(UDP_PCB *pcb, IP_ADDR *addr, uint16 port, char *dat, int len
 	IP_ADDR destaddr = *addr;
 	PBUF *buff;
 	char *buf;
-	printf("fle-->port send = %d, %d\n", addr->addr, port);
-	memset(buf, 0, len);
+	//printf("fle-->port send = %d, %d\n", addr->addr, port);
+	//memset(buf, 0, len);
 	buff = pbuf_alloc(PBUF_IP, PHY_FRAME_MAX_SIZE, PBUF_POOL);
 	buf = (char *)buff->payload;
 	memcpy(buf, dat, len);
@@ -1474,7 +1475,7 @@ static void user_recv(void *arg, UDP_PCB *pcb, PBUF *p, IP_ADDR *addr, uint16 po
 	UDP_HDR *h;
 	uint8 *dat;
 	uint16 len;
-	uint8 output[600] = {0x11, 0x22};
+	uint8 output[PROTOCOL_BUFFER] = {0x11, 0x22};
 
 	if(p != NULL) {
 		if(ack_enable(p) != 1) {

@@ -315,7 +315,7 @@ uint8 udp_sendto_if(UDP_PCB *pcb, PBUF *p, IP_ADDR *dst_ip, uint16 dst_port, NET
     UDP_HDR *udphdr;
     IP_ADDR *src_ip;
     uint8 err;
-    printf("uif --> %d\n", pcb->local_port);
+    //printf("uif --> %d\n", pcb->local_port);
     /* if the PCB is not yet bound to a port, bind it here */
     if (pcb->local_port == 0)
     {
