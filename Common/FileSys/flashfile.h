@@ -35,6 +35,12 @@ typedef struct file_header {
 #define FILE_LABEL_NAME     0x5F0B
 #define FILE_KEY_NAME       0x5F0C
 
+#ifdef MOUDLE_3LED
+#define FILE_TIMING_FLG     0x5F3C    // 1byte
+#define FILE_3LED_STATUS   0x5F3B   // 6bytes
+#define FILE_3LED_TIMING   0x5F3E   // 6byte
+#endif
+
 extern void create_info_file(uint16 filename, uint16 size, uint32 q);
 extern FILEINFO select_file_n(uint16 filename);
 extern uint8 read_private_file(uint16 filename, uint8 *dat, uint16 len);

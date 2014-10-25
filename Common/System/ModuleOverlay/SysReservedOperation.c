@@ -98,6 +98,7 @@ void LoadSysInformation(void)
 		printf("WIFI_AP_PW_BLK clear.\n");
 		memset(TempBuffer, 0x00, WIFI_APPW_BLKSIZE);
 		WriteReservedData(WIFI_AP_PW_BLK, TempBuffer, WIFI_APPW_BLKSIZE);
+		file_create_init();
 		
         memset(TempBuffer, 0xff, SYSCONFIGSIZE);
     }

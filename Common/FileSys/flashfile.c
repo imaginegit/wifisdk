@@ -117,3 +117,30 @@ uint8 read_private_file(uint16 filename, uint8 *dat, uint16 len) {
 	len = (len > info.size) ? info.size : len;
 	read_data(info.content_start_addr, dat, len);
 }
+
+void file_create_init() {
+	FILEINFO info;
+	uint8 type = 0;
+#ifdef MOUDLE_3LED
+	uint8 color[] = {0x00, 0x00, 0x00, 0x00};
+	uint8 timing[6] = {0x00};
+#endif
+
+	info = select_file_n(FILE_MAIN_NAME);
+	if(info.content_start_addr) return;
+
+	create_info_file(FILE_MAIN_NAME, 0x01, 0x00000000);
+	create_info_file(FILE_TYPE_NAME, 0x01, 0x00000000);
+	type = 0xf2;
+	write_private_file(FILE_TYPE_NAME, &type, 0x01);
+	create_info_file(FILE_LABEL_NAME, 0x14, 0x00000000);
+	#ifdef MOUDLE_3LED
+		create_info_file(FILE_TIMING_FLG, 0x01, 0x00000000);
+		type = 0x00;
+		write_private_file(FILE_TIMING_FLG, &type, 0x01);
+		create_info_file(FILE_3LED_STATUS, 0x04, 0x00000000);
+		write_private_file(FILE_3LED_STATUS, color, sizeof(color));
+		create_info_file(FILE_3LED_TIMING, 0x06, 0x00000000);
+		write_private_file(FILE_3LED_TIMING, timing, sizeof(timing));
+	#endif
+}
