@@ -258,7 +258,8 @@ _ATTR_OS_CODE_
 void OSStart(WIN **pWin, THREAD **pThread)
 {
     void *pWinArg;
-    
+    int idletime=0,sec_prev=0,sec_cur=0;
+	float cpubusy=0.0;
     while(1) 
     {
         *pWin = TaskInit(&pWinArg);//task adjust,call new task code,rturn main window pointer.
@@ -268,6 +269,7 @@ void OSStart(WIN **pWin, THREAD **pThread)
         
         while(1) 
         { 
+        #if 1
             if (SysService() != RETURN_OK)
             {
                 break;
@@ -287,9 +289,21 @@ void OSStart(WIN **pWin, THREAD **pThread)
             {
                 break;
             }
-           
+           	
             WinPaintProc(*pWin);
-            
+		#endif	
+
+		#if 1
+            	idletime ++;
+		sec_cur = GetSysTick()>>9;// 2^7=1.28S
+		if(sec_cur != sec_prev){
+			sec_prev = sec_cur;
+			cpubusy = 71680.0 / idletime;
+			printf("cpubusy: %f \n",cpubusy);   
+			idletime = 0;
+		}
+		#endif	
+		
         }
         //end the main window.
         WinDestroy(*pWin);
