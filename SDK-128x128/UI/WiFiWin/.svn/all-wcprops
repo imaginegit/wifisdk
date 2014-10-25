@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/wifisdk/!svn/ver/8/SDK-128x128/UI/WiFiWin
+END
+WiFiAPWin.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/WiFiWin/WiFiAPWin.h
+END
+WiFiKeyboardWin.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/WiFiWin/WiFiKeyboardWin.h
+END
+WiFiPlayWin.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/WiFiWin/WiFiPlayWin.c
+END
+WiFiMusicBrowWin.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/WiFiWin/WiFiMusicBrowWin.c
+END
+WiFiPlayWin.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/WiFiWin/WiFiPlayWin.h
+END
+WiFiMusicBrowWin.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/WiFiWin/WiFiMusicBrowWin.h
+END
+WiFiAPWin.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wifisdk/!svn/ver/8/SDK-128x128/UI/WiFiWin/WiFiAPWin.c
+END
+WiFiKeyboardWin.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/WiFiWin/WiFiKeyboardWin.c
+END

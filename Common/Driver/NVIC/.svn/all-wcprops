@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/wifisdk/!svn/ver/2/Common/Driver/NVIC
+END
+nvic.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/wifisdk/!svn/ver/2/Common/Driver/NVIC/nvic.c
+END
+hw_nvic.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/wifisdk/!svn/ver/2/Common/Driver/NVIC/hw_nvic.h
+END
+nvic.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/wifisdk/!svn/ver/2/Common/Driver/NVIC/nvic.h
+END

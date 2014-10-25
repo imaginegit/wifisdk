@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/wifisdk/!svn/ver/2/SDK-128x128/Scatter
+END
+BuildAll.sct
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/wifisdk/!svn/ver/2/SDK-128x128/Scatter/BuildAll.sct
+END
+BuildAll_Nand.sct
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/wifisdk/!svn/ver/2/SDK-128x128/Scatter/BuildAll_Nand.sct
+END
+Boot.ini
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/wifisdk/!svn/ver/2/SDK-128x128/Scatter/Boot.ini
+END
+ScatterLoader.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/wifisdk/!svn/ver/2/SDK-128x128/Scatter/ScatterLoader.c
+END
+scatter.sct
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/wifisdk/!svn/ver/2/SDK-128x128/Scatter/scatter.sct
+END
+Debug.sct
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/wifisdk/!svn/ver/2/SDK-128x128/Scatter/Debug.sct
+END
+ModuleInfoTab.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/wifisdk/!svn/ver/2/SDK-128x128/Scatter/ModuleInfoTab.h
+END

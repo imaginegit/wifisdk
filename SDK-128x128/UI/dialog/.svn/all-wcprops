@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/dialog
+END
+MessageBox.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/dialog/MessageBox.h
+END
+PowerOn_Off.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/dialog/PowerOn_Off.c
+END
+Hold.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/dialog/Hold.c
+END
+DialogBox.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/dialog/DialogBox.c
+END
+PowerOn_Off.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/dialog/PowerOn_Off.h
+END
+Hold.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/dialog/Hold.h
+END
+DialogBox.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/dialog/DialogBox.h
+END
+MessageBox.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wifisdk/!svn/ver/2/SDK-128x128/UI/dialog/MessageBox.c
+END

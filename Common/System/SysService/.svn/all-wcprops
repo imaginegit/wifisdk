@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/wifisdk/!svn/ver/2/Common/System/SysService
+END
+Delay.c
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/wifisdk/!svn/ver/2/Common/System/SysService/Delay.c
+END
+Hook.c
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/wifisdk/!svn/ver/2/Common/System/SysService/Hook.c
+END
+Service.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wifisdk/!svn/ver/2/Common/System/SysService/Service.c
+END
+UsbAdapterProbe.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/wifisdk/!svn/ver/2/Common/System/SysService/UsbAdapterProbe.c
+END
+delay.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/wifisdk/!svn/ver/2/Common/System/SysService/delay.h
+END
+Hook.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/wifisdk/!svn/ver/2/Common/System/SysService/Hook.h
+END
+Service.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wifisdk/!svn/ver/2/Common/System/SysService/Service.h
+END
+UsbAdapterProbe.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/wifisdk/!svn/ver/2/Common/System/SysService/UsbAdapterProbe.h
+END

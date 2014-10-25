@@ -1,0 +1,143 @@
+;
+;*******************************************************************************
+;                   Copyright (c) 2008,ZhengYongzhi
+;                         All rights reserved.
+;
+; File Name£º   CortexM3.sct
+; 
+; Description:  
+;
+; History:      <author>          <time>        <version>       
+;             ZhengYongzhi      2008-8-13          1.0
+;    desc:    ORG.
+;*******************************************************************************
+;
+#define BOOT_ROM_BASE       0x00000000
+#define MICROLIB_BASE       0x00002000
+#define DRIVERLIB_BASE      0x00003000
+
+#define START_CODE_BASE     0x0101f000
+#define START_DATA_BASE     0x03016000
+
+#define SYS_CODE_BASE       0x01000000
+#define SYS_CODE_SIZE       0x00020000
+
+#define SYS_DATA_BASE       0x03000000
+#define SYS_DATA_SIZE       0x00018000
+
+#define HEAP_BASE           0x03016000
+#define HEAP_LIMIT          0x03016000
+
+#define STACK_LIMIT         0x03016000
+#define STACK_BASE          0x03018000
+
+START_REGION START_CODE_BASE OVERLAY
+{
+    START START_CODE_BASE
+    {
+        *.o(START_VECT, +First)
+        *.o(START_CODE)
+    }
+}
+
+MICROLIB_REGION  MICROLIB_BASE
+{
+    MICROLIB_CODE MICROLIB_BASE
+    {
+        uldiv.o
+        ldiv.o
+        llshl.o
+        llushr.o
+        llsshr.o
+        memmovea.o
+        memseta.o
+        strlen.o
+        strcmp.o
+        memcmp.o
+        strcpy.o
+        dadd.o
+        dmul.o
+        ddiv.o
+        dflt.o
+        dfltu.o
+        dfix.o
+        dfixu.o
+        f2d.o
+        cdcmple.o
+        fadd.o
+        fmul.o
+        fdiv.o
+        fflt.o
+        ffltu.o
+        ffix.o
+        ffixu.o
+        d2f.o
+        cfrcmple.o
+        iusefp.o
+        depilogue.o
+        fepilogue.o
+        dfltll.o
+        dfltull.o
+        dfixll.o
+        dfixull.o
+        ffltll.o
+        ffltull.o
+        ffixll.o
+        ffixull.o
+        cdrcmple.o
+        cfcmple.o
+        siabs.o
+        strcat.o
+        strncpy.o
+        strxfrm.o
+        strchr.o
+        memchr.o
+        strncat.o
+        strcoll.o
+        strncmp.o
+        strrchr.o
+        strspn.o
+        strcspn.o
+        strpbrk.o
+    }
+    
+}
+
+LOAD_CODE_REGION SYS_CODE_BASE                                               
+{
+    SYS_CODE SYS_CODE_BASE SYS_CODE_SIZE
+    {
+        *(+RO)
+    }
+    
+    ;Module Info Table
+    MODULE_INFO 0x21000000
+    {
+    }
+}
+
+LOAD_DATA_REGION SYS_DATA_BASE                                               
+{
+    SYS_DATA SYS_DATA_BASE SYS_DATA_SIZE
+    {
+        *.o(vect, +First)
+        *(+RW)
+        *(+ZI)
+    }
+    
+    FTL_CACHE (ImageLimit(SYS_DATA)) OVERLAY
+    {
+        *(ftlcache)
+        *(ftlcache2)
+    }
+
+    ARM_LIB_HEAP    HEAP_BASE EMPTY (HEAP_LIMIT - HEAP_BASE)        ; Heap size == 0
+    {
+    }
+    
+    ARM_LIB_STACK   STACK_BASE EMPTY -(STACK_BASE - STACK_LIMIT)    ; Stack 0x20010000 -- 0x2000e000
+    {
+    }
+}
+
+;*******************************************************************************

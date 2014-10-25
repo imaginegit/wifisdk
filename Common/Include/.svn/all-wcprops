@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/wifisdk/!svn/ver/8/Common/Include
+END
+global.h
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/wifisdk/!svn/ver/8/Common/Include/global.h
+END
+typedef.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/wifisdk/!svn/ver/2/Common/Include/typedef.h
+END
+macro.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/wifisdk/!svn/ver/2/Common/Include/macro.h
+END
+SysInclude.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/wifisdk/!svn/ver/2/Common/Include/SysInclude.h
+END
+debug.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/wifisdk/!svn/ver/2/Common/Include/debug.h
+END

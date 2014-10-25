@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/wifisdk/!svn/ver/8/Common/wireless/sdio/common
+END
+sdio.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio.c
+END
+wificontrol.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/wifisdk/!svn/ver/8/Common/wireless/sdio/common/wificontrol.c
+END
+sdio_cis.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_cis.h
+END
+sdio_ids.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_ids.h
+END
+sdio.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio.h
+END
+wificontrol.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/wificontrol.h
+END
+wificommon.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/wificommon.c
+END
+sdio_irq.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_irq.c
+END
+sdiom.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdiom.c
+END
+sdio_func.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_func.h
+END
+sdio_ops.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_ops.c
+END
+sdio_ctrl.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_ctrl.c
+END
+sdio_ops.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_ops.h
+END
+sdio_io.c
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_io.c
+END
+sdio_cis.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_cis.c
+END
+sdio_card.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/wifisdk/!svn/ver/2/Common/wireless/sdio/common/sdio_card.h
+END

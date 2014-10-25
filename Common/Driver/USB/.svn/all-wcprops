@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB
+END
+USBCtrl.c
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB/USBCtrl.c
+END
+BulkOnly.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB/BulkOnly.c
+END
+USB20.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB/USB20.h
+END
+Chap_9.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB/Chap_9.c
+END
+BulkOnly.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB/BulkOnly.h
+END
+USBConfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB/USBConfig.h
+END
+USBDrv.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB/USBDrv.c
+END
+USBIsr.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB/USBIsr.c
+END
+USBReg.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/wifisdk/!svn/ver/2/Common/Driver/USB/USBReg.h
+END

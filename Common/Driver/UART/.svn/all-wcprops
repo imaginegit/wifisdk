@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/wifisdk/!svn/ver/2/Common/Driver/UART
+END
+hw_uart.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/wifisdk/!svn/ver/2/Common/Driver/UART/hw_uart.h
+END
+uart.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/wifisdk/!svn/ver/2/Common/Driver/UART/uart.h
+END
+uart.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/wifisdk/!svn/ver/2/Common/Driver/UART/uart.c
+END
