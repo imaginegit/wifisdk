@@ -30,10 +30,30 @@
   desc:         ORG
 --------------------------------------------------------------------------------
 */
+#ifdef MOUDLE_3LED
+ _ATTR_SYS_CODE_
+void ClockRun(void)
+{
+    CurrentTimer++;
+    if(CurrentTimer == TIME_MAX) CurrentTimer = 0;
+    make_timing();
+    make_color();
+}
+
+ _ATTR_SYS_CODE_
+uint32 GetClock(void)
+{
+    return CurrentTimer;
+}
+#endif
+ 
 _ATTR_SYS_CODE_
 void SysTickTimerRun(void)
 {
     SysTickCounter++;
+#ifdef MOUDLE_3LED
+    ClockRun();
+#endif
 }
 
  _ATTR_SYS_CODE_
