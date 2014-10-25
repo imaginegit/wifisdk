@@ -60,6 +60,9 @@ typedef enum _PWM_PRESCALE
     PWM_PRE_MAX
     
 }ePWM_PRESCALE;
+
+#define EXT_PWM_COM    0
+#define EXT_PWM_GPIO   GPIOPortA_Pin0
 /*
 --------------------------------------------------------------------------------
   
@@ -88,6 +91,8 @@ typedef uint32 (*pPwmPrescalefFctorGet)(ePWM_CHN ch);
 extern void PWM_Start(ePWM_CHN ch);
 extern void PWM_Stop(ePWM_CHN ch);
 extern int32 PwmRateSet(ePWM_CHN ch, UINT32 rate, UINT32 PWM_freq);
+void PWM0_Start(void);
+extern __irq void pwm0_int(void);
 
 /*
 ********************************************************************************

@@ -15,6 +15,84 @@
 #define _IN_PWM_
 
 #include "DriverInclude.h"
+#include "SysInclude.h"
+
+#if 0
+/*------------------------------------------------------------------------------
+*
+* Virtual PWM3 ,Create by system tick and GPIO
+*
+------------------------------------------------------------------------------*/
+uint8 pwm3protstate = 0;
+int pwm3duty = 0;
+void VirPWM3Init(void){
+    	GpioMuxSet(EXT_PWM_GPIO, Type_Gpio);
+	Gpio_SetPinDirection(EXT_PWM_GPIO, GPIO_OUT);
+	Gpio_SetPinLevel(EXT_PWM_GPIO, GPIO_HIGH);
+}
+
+void VirPWM3SetDuty (int mduty){
+	if((mduty>=0) && (mduty <= 100)){
+		pwm3duty = mduty;
+	}
+}
+
+void VirPWM3Ctrl(){
+	/*pwm3duty++;
+	if(pwm3duty == 3) {
+		Pwm->CHANNEL[1].Tacnt = 1;
+		pwm3duty = 0;
+	}*/
+	printf("fle--->pwm3duty = %d, cntr = %d\n", pwm3duty, Pwm->CHANNEL[1].Tacnt);
+	/*if(pwm3duty < 1000) return;
+	pwm3duty = 0;
+	printf("pwm3 cntr = %d\n", Pwm->CHANNEL[0].Tacnt);*/
+	pwm3protstate ^= 0x01;
+	/*if(pwm3duty) {
+		printf("fle-->pwm3protstate = %d\n", pwm3protstate);
+		pwm3duty = 0;
+	}*/
+	Gpio_SetPinLevel(GPIOPortA_Pin0, pwm3protstate);
+}
+
+_ATTR_SYS_DATA_
+SYSTICK_LIST VirPWM3FuncTimer = 
+{
+    NULL,
+    0,
+    10,		// set virtual pwm3 100Hz
+    0,
+    VirPWM3Ctrl,
+};
+
+void PWM3_Start(void){
+	VirPWM3Init();
+	//VirPWM3SetDuty(75);
+	//SystickTimerStart(&VirPWM3FuncTimer);
+}
+#endif
+
+void PWM0_Start(void) {
+	GpioMuxSet(EXT_PWM_GPIO, Type_Gpio);
+	Gpio_SetPinDirection(EXT_PWM_GPIO, GPIO_OUT);
+	Gpio_SetPinLevel(EXT_PWM_GPIO, GPIO_LOW);
+}
+
+int irqcycle=0;
+__irq void pwm0_int(void) {
+
+	Pwm->CHANNEL[EXT_PWM_COM].Tacmd |= PWM_INTCLR;
+	Pwm->CHANNEL[EXT_PWM_COM].Tacmd &= ~(PWM_CMODEEN | PWM_ENABLE | PWM_OUTPUT_ENABLE | PWM_TIMEINTEN);
+	irqcycle++;
+	if(irqcycle==1){
+		Gpio_SetPinLevel(EXT_PWM_GPIO, GPIO_LOW);
+	} else {
+		Pwm->CHANNEL[EXT_PWM_COM].Tacnt = 0;
+		Gpio_SetPinLevel(EXT_PWM_GPIO, GPIO_HIGH);
+		irqcycle = 0;
+	}
+	Pwm->CHANNEL[EXT_PWM_COM].Tacmd |= (PWM_CMODEEN | PWM_OUTPUT_ENABLE | PWM_TIMEINTEN | PWM_ENABLE);
+}
 
 /*
 --------------------------------------------------------------------------------
@@ -122,7 +200,7 @@ uint32 PwmPrescalefFctorGet(ePWM_CHN ch)
   Description   : PWM 占空比设置
                   
   Input         : num -- PWM号(0~4)
-                  rate -- 高与低的比值(0~100)
+                  rate -- 高与低的比值(0~255)
                   PWM_freq  -- 当前PWM的频率(<10k)
                   
   Return        : 
@@ -136,33 +214,48 @@ int32 PwmRateSet(ePWM_CHN ch, UINT32 rate, UINT32 PWM_freq)
     UINT32 pwmclk;
     UINT32 pwmPrescalefFctor;
     
-    if (rate == 100)
+    if (rate == 255)
     {
+        if(ch == EXT_PWM_COM) {
+		Gpio_SetPinLevel(EXT_PWM_GPIO, GPIO_HIGH);
+	 }
         Pwm->CHANNEL[ch].Tacmd &= ~(PWM_ENABLE);
         Pwm->CHANNEL[ch].Tacmd |= PWM_REGRESET;
-        
+	 
         return OK; 
     }
     else if (rate == 0)
     {
+        if(ch == EXT_PWM_COM) {
+		Gpio_SetPinLevel(EXT_PWM_GPIO, GPIO_LOW);
+	 }
         Pwm->CHANNEL[ch].Tacmd &= ~(PWM_ENABLE);
         Pwm->CHANNEL[ch].Tacmd |= PWM_REGRESET;
         
         return OK; 
     }
         
-    if((rate > 0) && (rate < 100))
+    if((rate > 0) && (rate < 255))
     {
         pwmclk = GetPclkFreq();
+        irqcycle=0;
         data1 = ((pwmclk * 1000/* * 1000*/) >> ((PwmPrescalefFctorGet(ch)) + 1)) / PWM_freq;
-        data0 = rate * data1 / 100;
-    
-    	Pwm->CHANNEL[ch].Tacmd &= ~(PWM_ENABLE | PWM_OUTPUT_ENABLE | PWM_TIMEINTEN);
+        data0 = rate * data1 / 255;
+
+	 if(ch == EXT_PWM_COM) {
+        	Pwm->CHANNEL[ch].Tacmd &= ~(PWM_CMODEEN | PWM_ENABLE | PWM_OUTPUT_ENABLE | PWM_TIMEINTEN);
+	 } else {
+	 	Pwm->CHANNEL[ch].Tacmd &= ~(PWM_ENABLE | PWM_OUTPUT_ENABLE | PWM_TIMEINTEN);
+	 }
         Pwm->CHANNEL[ch].Tacnt = 0;
-	    Pwm->CHANNEL[ch].Tadata0 = data0;
-	    Pwm->CHANNEL[ch].Tadata1 = data1;
-        Pwm->CHANNEL[ch].Tacmd |= (PWM_OUTPUT_ENABLE | PWM_TIMEINTEN | PWM_ENABLE);
-        
+        Pwm->CHANNEL[ch].Tadata0 = data0;
+        Pwm->CHANNEL[ch].Tadata1 = data1;
+	 if(ch == EXT_PWM_COM) {
+        	Pwm->CHANNEL[ch].Tacmd |= (PWM_CMODEEN | PWM_OUTPUT_ENABLE | PWM_TIMEINTEN | PWM_ENABLE);
+	 } else {
+	 	Pwm->CHANNEL[ch].Tacmd |= (PWM_OUTPUT_ENABLE | PWM_TIMEINTEN | PWM_ENABLE);
+	 }
+		
         return OK; 
     }
 
