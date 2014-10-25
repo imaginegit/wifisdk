@@ -2374,6 +2374,9 @@ void wl_iw_event(dhd_pub_t *pub, wl_event_msg_t *e, void* data)
 			if (!(flags & WLC_EVENT_MSG_LINK)) 
 			{
 				printf("Link Down Event %d,reason=0x%08x\n", event_type, reason);
+				ClearMsg(MSG_QPW_ENABLE);
+				ClearMsg(MSG_WIFI_TCP_CONNECTING);
+				SendMsg(MSG_WIFI_SCAN_ERR);
 				MSG_CLR_WPA_SH();
 			}
 			else 
