@@ -1,0 +1,17 @@
+*.o
+*.__i
+*.d
+RkNano.bin/
+Log/
+Firmware/
+RkNano.uvgui*
+*.bak
+*.dep
+*.map
+*.lnp
+*.lst
+*.uvopt
+*.axf
+*.htm
+*.plg
+*.tra
