@@ -70,6 +70,7 @@ typedef __packed struct _WIFICONFIG
 #define ERROR_FRAME_HEADER    -2
 #define ERROR_FRAME_TAIL      -3
 #define ERROR_NOT_SUPPORT     -4
+#define ERROR_VERSION         -5
 
 #define RETURN_OK             0
 #define NOT_ANSWER            1

@@ -163,7 +163,6 @@ int create_active_command_data_n(uint8 *output, uint8 command, uint8 count) {
         t->lenh    = (FRAME_DEVICE_INFO_LEN >> 8) & 0xff;
         t->lenl    = FRAME_DEVICE_INFO_LEN & 0xff;
         t->command = command;
-        t->type    = get_self_type();
         get_device_name(t->name, DEVICE_NAME_LEN);
         return create_response_data_n(output, sizeof(TYPENAME), 0x01);
 }
@@ -178,7 +177,6 @@ uint16 create_active_command_data_mul(uint8 *output, uint16 olen, uint8 command,
         t->lenh    = (FRAME_DEVICE_INFO_LEN >> 8) & 0xff;
         t->lenl    = FRAME_DEVICE_INFO_LEN & 0xff;
         t->command = command;
-        t->type    = get_self_type();
         get_device_name(t->name, DEVICE_NAME_LEN);
         return sizeof(TYPENAME);
 }
@@ -1176,6 +1174,7 @@ int check_frame(uint8 *dat, uint16 len) {
 	if(SWAP_HL(h->header) != PROTOCOL_FRAME_HEADER) return ERROR_FRAME_HEADER;
 	if(SWAP_HL(*((uint16 *)(dat + len - 2))) != PROTOCOL_FRAME_TAIL) return ERROR_FRAME_TAIL;
 	if(get_type_status(h->rec)) return NOT_RESPONSE;
+	if(h->ver != PROTOCOL_FRAME_VER) return ERROR_VERSION;
 	return RETURN_OK;
 }
 
@@ -1359,6 +1358,20 @@ uint16 create_answer_data(uint8 *output, uint8 crch, uint8 crcl, uint8 total, ui
 	return create_response_data_mul(output, d - (output + sizeof(HEADER)), total, rec, time);
 }
 
+uint16 create_error_version_data(uint8 *output, uint8 total, uint8 rec, uint8 time) {
+	uint8 *d;
+	COHEADER *co;
+
+	d = output + sizeof(HEADER);
+	co = (COHEADER *)d;
+	co->num         = 0x01;
+	co->len           = 0x0000;
+	co->command = C_VERSIONERR;
+	d += sizeof(COHEADER);
+
+	return create_response_data_mul(output, d - (output + sizeof(HEADER)), total, rec, time);
+}
+
 uint8 check_crc_and_answer(uint8 *dat, uint16 len) {
 	HEADER *h;
 
@@ -1376,6 +1389,7 @@ uint16 analytical_command(uint8 *output, uint8 *dat, uint16 len) {
 	uint16 size;
 	uint8 *p;
 
+	if(check_frame(dat, len) == ERROR_VERSION) return create_error_version_data(output, 0x01, h->rec, h->time);
 	if(check_frame(dat, len) != RETURN_OK) return 0;
 
 	p = dat;

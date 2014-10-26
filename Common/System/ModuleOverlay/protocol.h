@@ -41,6 +41,7 @@
 #define C_APW                 0x0b
 #define C_SRECNET             0x0c
 #define C_ANSWER              0x0d
+#define C_VERSIONERR          0x10
 
 /****************************************************/
 /*  private command */
@@ -167,13 +168,12 @@ typedef __packed struct _common_command {
 	uint8  command;
 } COHEADER;
 
-#define FRAME_TYPE_NAME_LEN   DEVICE_NAME_LEN + 0x05
+#define FRAME_TYPE_NAME_LEN   DEVICE_NAME_LEN + 0x04
 typedef struct _type_name {
 	uint8  num;
 	uint8  lenh;
 	uint8  lenl;
 	uint8  command;
-	uint8  type;
 	uint8  name[DEVICE_NAME_LEN];
 } TYPENAME;
 
