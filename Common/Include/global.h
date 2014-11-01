@@ -81,11 +81,14 @@ typedef __packed struct _WIFICONFIG
 //
 
 #define MOUDLE_3LED
-#define TIME_MAX                 8640000
 #define TIME_BASE                100
-#define TIME_M_BASE            6000
-#define MINUTE_TO_SECOND 60
+#define TIME_MAX                 (86400 * TIME_BASE)
+#define TIME_M_BASE              (60 * TIME_BASE)
+#define MINUTE_TO_SECOND         60
 #define HOUR_TO_SECOND           3600
+#define COLOR_LEN_ARRAY          3
+
+#define PRINTF_CPU_USE           0
 
 //system setting parameter structure definition.
 typedef __packed struct _SYSCONFIG
@@ -189,16 +192,17 @@ _ATTR_SYS_BSS_  EXT UINT8       LanguageNum;//set the real suppot language numbe
 _ATTR_SYS_BSS_  EXT UINT8       DefaultLanguageID;
 _ATTR_SYS_BSS_  EXT UINT8       ConnectNumber;
 _ATTR_SYS_BSS_  EXT UINT32     QpwNumber;
+_ATTR_SYS_BSS_  EXT UINT8       SoftApStart;
 
 #ifdef MOUDLE_3LED
-_ATTR_SYS_BSS_  EXT UINT8       ColorSave[0x03];
-_ATTR_SYS_BSS_  EXT UINT8       FreqSave[0x03];
+_ATTR_SYS_BSS_  EXT UINT8       ColorSave[COLOR_LEN_ARRAY];
+_ATTR_SYS_BSS_  EXT UINT8       FreqSave[COLOR_LEN_ARRAY];
 // color action
-_ATTR_SYS_BSS_  EXT UINT8       ColorMark;
-_ATTR_SYS_BSS_  EXT UINT32     StartColor;
-_ATTR_SYS_BSS_  EXT UINT32     EndColor;
-_ATTR_SYS_BSS_  EXT UINT32     ColorSpace;
-_ATTR_SYS_BSS_  EXT UINT32     MarkTime;
+_ATTR_SYS_BSS_  EXT UINT16     ColorMark;
+_ATTR_SYS_BSS_  EXT UINT8       StartColor[COLOR_LEN_ARRAY];
+_ATTR_SYS_BSS_  EXT UINT8       EndColor[COLOR_LEN_ARRAY];
+_ATTR_SYS_BSS_  EXT UINT8       ColorSpace[COLOR_LEN_ARRAY];
+_ATTR_SYS_BSS_  EXT UINT32     MarkTime[COLOR_LEN_ARRAY];
 // timing mode
 _ATTR_SYS_BSS_  EXT UINT8       TimingMark;
 _ATTR_SYS_BSS_  EXT UINT32     CurrentTimer;

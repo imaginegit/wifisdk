@@ -258,14 +258,16 @@ _ATTR_OS_CODE_
 void OSStart(WIN **pWin, THREAD **pThread)
 {
     void *pWinArg;
+#if PRINTF_CPU_USE
     int idletime=0,sec_prev=0,sec_cur=0;
-	float cpubusy=0.0;
+    float cpubusy=0.0;
+#endif
     while(1) 
     {
         *pWin = TaskInit(&pWinArg);//task adjust,call new task code,rturn main window pointer.
         WinCreat((WIN *)NULL, *pWin, pWinArg); 
-		ConnectNumber = 0;
-		printf("wifi init start!\n");
+	 ConnectNumber = 0;
+	 printf("wifi init start!\n");
         
         while(1) 
         { 
@@ -291,18 +293,18 @@ void OSStart(WIN **pWin, THREAD **pThread)
             }
            	
             WinPaintProc(*pWin);
-		#endif	
+	 #endif	
 
-		#if 1
-            	idletime ++;
-		sec_cur = GetSysTick()>>9;// 2^7=1.28S
-		if(sec_cur != sec_prev){
-			sec_prev = sec_cur;
-			cpubusy = 71680.0 / idletime;
-			printf("cpubusy: %f \n",cpubusy);   
-			idletime = 0;
-		}
-		#endif	
+	 #if PRINTF_CPU_USE
+            idletime ++;
+	     sec_cur = GetSysTick()>>9;// 2^7=1.28S
+	     if(sec_cur != sec_prev){
+		   sec_prev = sec_cur;
+		   cpubusy = 7168.0 / idletime;	// 本公式按照主程序1400转/秒为满负荷，通过指令数比得出
+		   printf("CPU usage: %f %\n",cpubusy);   
+		   idletime = 0;
+	     }
+	 #endif
 		
         }
         //end the main window.
