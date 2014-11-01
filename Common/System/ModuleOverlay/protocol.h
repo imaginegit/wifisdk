@@ -66,8 +66,8 @@
 
 /** send and recevice object **/
 #define RS_ANON                      0xff
-#define RS_CSC_201409           0xf0
-#define RS_UNKNOW_201409   0xf1
+#define RS_ALL_201409           0xf0
+#define RS_CSC_201409           0xf1
 #define RS_3CLED_201410       0xf2
 #define ANSN                            0x00
 #define ANSY                            0x01
@@ -76,6 +76,9 @@
 #define MUL_COMMAND
 
 #ifdef MOUDLE_3LED
+	#define LED_BL_EN            GPIOPortA_Pin2
+	#define LED_BL_OPEN        0x01
+	#define LED_BL_CLOSE       0x00
 	#define LED_RED_PORT     0x00
 	#define LED_GREEN_PORT 0x01
 	#define LED_BLUE_PORT   0x02
@@ -85,6 +88,10 @@
 	#define LED_NORMAL_FREQ     0x05
 	#define LED_TRUE                    0x01
 	#define LED_FALSE                  0x00
+	#define LED_COLOR_MAX         0xffffffff
+	#define LED_TIME_SPACE 0
+	#define LED_ADD_SUB      1
+	#define LED_ACTION_ON  2
 #endif
 
 #define ATTR_BY_NAME          "byname"
