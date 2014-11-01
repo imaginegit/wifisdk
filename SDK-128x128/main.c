@@ -19,6 +19,7 @@
 #include "MainMenu.h"
 #include "PowerOn_Off.h"
 #include "Hold.h"
+#include "protocol.h"
 
 
 /*
@@ -132,12 +133,10 @@ void SysVariableInit(void)
     OpenTimer = 0;
     CloseTimer = 0;
     ColorMark = 0;
-    StartColor = 0;
-    EndColor   = 0;
-    ColorSpace = 0;
-    MarkTime   = 0;
+    memset(StartColor, 0, sizeof(StartColor));
     CurrentTimer = 0;
 #endif
+    SoftApStart = 0;
     
 /*    LCD_TEXTFORT   = 0xffff;
     LCD_IMAGEINDEX = 0xffff;*/
@@ -311,7 +310,7 @@ void GpioInit(void)
     GPIO_SetPinPull(GPIOPortD_Pin2, 1);
     
     //8bit data port iomux
-    DataPortMuxSet(IO_LCD);    
+    //DataPortMuxSet(IO_LCD);    
 }
 
 /*
@@ -464,6 +463,8 @@ void SystemInit(void)
     }
     
     LCD_SetColor(TempColor);*/
+    GpioMuxSet(LED_BL_EN, Type_Gpio);
+    Gpio_SetPinDirection(LED_BL_EN, GPIO_OUT);
     GpioMuxSet(SD_DET, IOMUX_GPIOD2_PWM1);
     GpioMuxSet(BACKLIGHT_PIN, IOMUX_GPIOD3_PWM2);
     
@@ -658,8 +659,11 @@ UINT32 Main(void)
     PWM0_Start();
 
 #ifdef MOUDLE_3LED
+    PMU_EnterModule(PMU_MAX);
     led_init();
+    //PMU_ExitModule(PMU_MAX);
 #endif
+
     printf("Os Start!\n");
     OSStart(&pMainWin, &pMainThread);
 	
