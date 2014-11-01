@@ -61,7 +61,7 @@ typedef enum _PWM_PRESCALE
     
 }ePWM_PRESCALE;
 
-#define EXT_PWM_COM    0
+#define EXT_PWM_COM    PWM_CHN0
 #define EXT_PWM_GPIO   GPIOPortA_Pin0
 /*
 --------------------------------------------------------------------------------

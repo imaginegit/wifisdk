@@ -193,6 +193,36 @@ uint32 PwmPrescalefFctorGet(ePWM_CHN ch)
 }
 #endif
 
+void pwm_set_gpio(ePWM_CHN ch, uint8 enable) {
+	if(ch == PWM_CHN1) {
+		if(GpioMuxGet(SD_DET)) {
+			GpioMuxSet(SD_DET, IOMUX_GPIOD2_IO);
+			Gpio_SetPinDirection(SD_DET, GPIO_OUT);
+		}
+		Gpio_SetPinLevel(SD_DET, enable);
+	}
+	if(ch == PWM_CHN2) {
+		if(GpioMuxGet(BACKLIGHT_PIN)) {
+			GpioMuxSet(BACKLIGHT_PIN, IOMUX_GPIOD3_IO);
+			Gpio_SetPinDirection(BACKLIGHT_PIN, GPIO_OUT);
+		}
+		Gpio_SetPinLevel(BACKLIGHT_PIN, enable);
+	}
+}
+
+void pwm_set_pwm(ePWM_CHN ch) {
+	if(ch == PWM_CHN1) {
+		if(!GpioMuxGet(SD_DET)) {
+			GpioMuxSet(SD_DET, IOMUX_GPIOD2_PWM1);
+		}
+	}
+	if(ch == PWM_CHN2) {
+		if(!GpioMuxGet(BACKLIGHT_PIN)) {
+			GpioMuxSet(BACKLIGHT_PIN, IOMUX_GPIOD3_PWM2);
+		}
+	}
+}
+
 /*
 --------------------------------------------------------------------------------
   Function name : BOOL PwmRateSet(int num,UINT32 rate, UINT32 PWM_freq)
@@ -219,6 +249,7 @@ int32 PwmRateSet(ePWM_CHN ch, UINT32 rate, UINT32 PWM_freq)
         if(ch == EXT_PWM_COM) {
 		Gpio_SetPinLevel(EXT_PWM_GPIO, GPIO_HIGH);
 	 }
+	 pwm_set_gpio(ch, GPIO_HIGH);
         Pwm->CHANNEL[ch].Tacmd &= ~(PWM_ENABLE);
         Pwm->CHANNEL[ch].Tacmd |= PWM_REGRESET;
 	 
@@ -229,6 +260,7 @@ int32 PwmRateSet(ePWM_CHN ch, UINT32 rate, UINT32 PWM_freq)
         if(ch == EXT_PWM_COM) {
 		Gpio_SetPinLevel(EXT_PWM_GPIO, GPIO_LOW);
 	 }
+	 pwm_set_gpio(ch, GPIO_LOW);
         Pwm->CHANNEL[ch].Tacmd &= ~(PWM_ENABLE);
         Pwm->CHANNEL[ch].Tacmd |= PWM_REGRESET;
         
@@ -237,6 +269,7 @@ int32 PwmRateSet(ePWM_CHN ch, UINT32 rate, UINT32 PWM_freq)
         
     if((rate > 0) && (rate < 255))
     {
+    	 pwm_set_pwm(ch);
         pwmclk = GetPclkFreq();
         irqcycle=0;
         data1 = ((pwmclk * 1000/* * 1000*/) >> ((PwmPrescalefFctorGet(ch)) + 1)) / PWM_freq;
