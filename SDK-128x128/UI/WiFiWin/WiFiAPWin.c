@@ -297,13 +297,14 @@ static int WiFiReadAPPWFrmRecord(void)
 	ConnectNumber++;
 	if(pAPWD->header != WIFI_APPW_ITEM_OK || ConnectNumber > 2) {
 		printf("fle--->init connect\n");
-		ConnectNumber = 0;
+		SoftApStart = 1;
 		strcpy(gSysConfig.WiFiConfig.ssid, "initap201412");
 		strcpy(gSysConfig.WiFiConfig.password, "123456789");
 		gSysConfig.WiFiConfig.password_len = 9;
 		/*strcpy(gSysConfig.WiFiConfig.ssid, "imagine");
 		strcpy(gSysConfig.WiFiConfig.password, "13428725525");
 		gSysConfig.WiFiConfig.password_len = 11;*/
+		return;
 	}
 
 	if (FALSE != CheckMsg(MSG_WIFI_APPW_JUMP))
@@ -613,9 +614,11 @@ UINT32 WiFiAPWinService(void)
 
         //TaskSwitch(TASK_ID_WIFI_PLAY, NULL);
         SendMsg(MSG_WIFI_TCP_CONNECTING);
-	 if(!ConnectNumber) {
+	 if(SoftApStart) {
 	 	SendMsg(MSG_QPW_ENABLE);
+		SoftApStart = 0;
 	 }
+	 ConnectNumber = 0;
 	 //create_active_command_data(temp, C_UPLOAD);
 	 eth_service(0);
 	 upload_connect(C_UPLOAD);
