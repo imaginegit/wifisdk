@@ -24,8 +24,12 @@ typedef struct file_header {
 #define FILE_HEADER_LEN   (FILE_NAME_LEN + FILE_SIZE_LEN + FILE_P_LEN)
 
 #define FLASH_PAGE_SIZE     256
-#define FILE_ALL_SIZE_ADDR  0x120000
-#define FILE_START_ADDR     0x120004
+#define FILE_ADDR_START       0x120000
+#define FILE_COUNT_LEN          0x00
+#define FILE_ALL_SIZE_LEN     0x04
+#define FILE_COUNT_ADDR       FILE_ADDR_START
+#define FILE_ALL_SIZE_ADDR  FILE_COUNT_ADDR + FILE_COUNT_LEN
+#define FILE_START_ADDR     FILE_ALL_SIZE_ADDR + FILE_ALL_SIZE_LEN
 #define FLASH_SIZE_LEN      (FILE_START_ADDR - FILE_ALL_SIZE_ADDR)
 
 #define FILE_OS_ADDR        256
@@ -38,7 +42,7 @@ typedef struct file_header {
 #ifdef MOUDLE_3LED
 #define FILE_TIMING_FLG     0x5F3C    // 1byte
 #define FILE_3LED_STATUS   0x5F3B   // 6bytes
-#define FILE_3LED_TIMING   0x5F3E   // 6byte
+#define FILE_3LED_TIMING   0x5F3E   // 4byte
 #endif
 
 extern void create_info_file(uint16 filename, uint16 size, uint32 q);
