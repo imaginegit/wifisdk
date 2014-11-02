@@ -862,6 +862,7 @@ uint16 create_attr_data_mul(uint8 *output, uint16 olen, uint8 *name, uint16 len,
 }
 #endif
 
+#if FILE_DEBUG
 int create_net_file(uint8 *dat, uint16 len) {
 	FILEHEADER *p;
 	
@@ -871,18 +872,19 @@ int create_net_file(uint8 *dat, uint16 len) {
 	return RETURN_OK;
 }
 
-void read_net_file() {
+void read_net_file(uint8 block) {
 	uint8 value[WIFI_APPW_BLKSIZE];
 	uint16 len = WIFI_APPW_BLKSIZE;
 	uint8 *p;
 	
-	ReadReservedData(USERFILE_BLK, value, WIFI_APPW_BLKSIZE);
+	ReadReservedData(block, value, WIFI_APPW_BLKSIZE);
 	p = value;
 	while(len--) {
 		printf("%02x ", *p++);
 	}
 	printf("\n");
 }
+#endif
 
 #ifdef MOUDLE_3LED
 uint32 get_time(uint8 h, uint8 m, uint8 s) {
@@ -1252,7 +1254,7 @@ void set_timing(uint8 *dat, uint16 len) {
 void set_action(uint8 *dat, uint16 len) {
 	ACTIONINFO *a;
 
-	if(ColorMark & 0x03) return;
+	if(ColorMark & 0x03) ColorMark = 0;
 	if(len != sizeof(ACTIONINFO)) return;
 	a = (ACTIONINFO *)dat;
 	set_color_action(a->cycleflg, a->cred, a->cgreen, a->cblue, a->tred, a->tgreen, a->tblue, get_number(a->htime, a->stime, a->ttime, a->ltime));
@@ -1362,18 +1364,20 @@ uint16 make_mul_command(uint8 *output, uint16 olen, uint8 *dat, uint16 len, uint
 			ClearMsg(MSG_WIFI_TCP_CONNECTING);
 			SendMsg(MSG_WIFI_SCAN_ERR);
 			break;
+	#if FILE_DEBUG
 		case C_CREATE:     //0xcf
 			set_function = create_net_file;
 			break;
 		case C_READ:
-			read_net_file();
+			read_net_file(*dat);
 			break;
 		case C_WRITE:
 			write_private_file(*dat << 8 | *(dat + 1), dat + 2,  len - 2);
 			break;
-		case 0xcc:
+		case C_LED_INIT:
 			led_init();
 			break;
+	#endif
 		default:
 			andalytical_private_command(command, dat, len);
 			break;

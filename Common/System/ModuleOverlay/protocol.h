@@ -58,9 +58,14 @@
 	#define C_LED_POWER              0x23
 #endif
 
+#define FILE_DEBUG 1
+
+#if FILE_DEBUG
+#define C_LED_INIT             0xcc
 #define C_CREATE                0xcf
 #define C_WRITE                 0xbf
 #define C_READ                  0xdf
+#endif
 
 #define PRV_TIME_INIT      0xff
 

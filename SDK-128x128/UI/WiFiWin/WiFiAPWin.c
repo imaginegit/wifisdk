@@ -596,7 +596,7 @@ UINT32 WiFiAPWinService(void)
     //*************************************************
     if (GetMsg(MSG_WIFI_CONN_FAILURE))
     {
-        WiFiDelFailAPPWFrmRecord();		
+//        WiFiDelFailAPPWFrmRecord();		
         ThreadDelete(&pMainThread, &WiFiThread);
         TaskArg.MainMenu.MenuID = MAINMENU_ID_NET_RADIO;
         TaskSwitch(TASK_ID_MAINMENU, &TaskArg);
